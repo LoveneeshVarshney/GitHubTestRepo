@@ -1,0 +1,13 @@
+name: Test
+
+on: push
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+    - name: Setting up debug message
+      run: echo "::debug::Set the Octocat variable"
