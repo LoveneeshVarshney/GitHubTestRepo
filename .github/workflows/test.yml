@@ -3,16 +3,14 @@ name: Test
 on: push
 
 jobs:
-  Test:
+  matrix_job:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
+    strategy:
+      matrix:
+        pet: [cat, dog]
+        color: [pink, brown]
+        include:
+          - color: white
+            pet: dog
     steps:
-    - name: Setting up debug message
-      run: echo "::debug::Set the Octocat variable"
-    - env:
-        EVENT_CONTEXT: ${{ toJSON(github.event) }}
-      run: |
-          echo $EVENT_CONTEXT
-          echo "USER LOGIN" ${{ github.event.push.user.login }}
+      - run: echo "Hello ${{ matrix.color }} ${{ matrix.pet }}"
